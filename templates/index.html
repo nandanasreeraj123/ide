@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code IDE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+
+        <h1>Online IDE</h1>
+
+        <textarea id="code" placeholder="Write your code here..."></textarea>
+
+        <select id="language">
+            <option value="python">Python</option>
+            <option value="dart">Dart</option>
+            <option value="javascript">JavaScript</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+        </select>
+
+        <button onclick="runCode()">Run Code</button>
+
+        <div id="output"></div>
+        <div id="error"></div>
+    </div>
+
+    <script>
+        // JavaScript to handle code execution
+        async function runCode() {
+            const code = document.getElementById("code").value;
+            const language = document.getElementById("language").value;
+
+            const data = {
+                code: code,
+                language: language
+            };
+
+            try {
+                const response = await fetch('/run', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                if (result.error) {
+                    document.getElementById("error").innerText = result.error;
+                    document.getElementById("output").innerText = '';
+                } else {
+                    document.getElementById("output").innerText = result.output;
+                    document.getElementById("error").innerText = '';
+                }
+            } catch (error) {
+                document.getElementById("error").innerText = "Error running code.";
+            }
+        }
+    </script>
+</body>
+<script>
+    // JavaScript to handle code execution and prevent tab key from focusing on the next element
+    async function runCode() {
+        const code = document.getElementById("code").value;
+        const language = document.getElementById("language").value;
+
+        const data = {
+            code: code,
+            language: language
+        };
+
+        try {
+            const response = await fetch('/run', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            if (result.error) {
+                document.getElementById("error").innerText = result.error;
+                document.getElementById("output").innerText = '';
+            } else {
+                document.getElementById("output").innerText = result.output;
+                document.getElementById("error").innerText = '';
+            }
+        } catch (error) {
+            document.getElementById("error").innerText = "Error running code.";
+        }
+    }
+
+    // Prevent tab key from shifting focus and insert a tab space in the textarea
+    document.getElementById("code").addEventListener("keydown", function(event) {
+        if (event.key === "Tab") {
+            event.preventDefault();
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            
+            // Insert a tab character at the cursor position
+            this.value = this.value.substring(0, start) + "\t" + this.value.substring(end);
+            
+            // Move the cursor to the right after the inserted tab
+            this.selectionStart = this.selectionEnd = start + 1;
+        }
+    });
+</script>
+
+</html>
