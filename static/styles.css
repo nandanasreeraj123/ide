@@ -13,7 +13,7 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1200px; /* Increased max-width for larger screens */
     padding: 5%;
     background-color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -23,7 +23,7 @@ body {
 
 /* Logo */
 .logo {
-    width: clamp(150px, 20vw, 250px); /* Increased and responsive */
+    width: clamp(150px, 15vw, 250px); /* Adjusted for better scaling */
     height: auto;
     display: block;
     margin: 0 auto 30px;
@@ -33,7 +33,7 @@ body {
 h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     text-align: center;
-    color: #E03F23; /* Standardized */
+    color: #E03F23;
     margin-bottom: 30px;
     font-weight: 600;
 }
@@ -43,14 +43,14 @@ textarea {
     width: 100%;
     height: 300px;
     padding: 12px;
-    border: 2px solid #E03F23; /* Kept as is */
+    border: 2px solid #E03F23;
     font-family: monospace;
     font-size: clamp(16px, 2vw, 30px);
     border-radius: 10px;
     margin-bottom: 30px;
     box-sizing: border-box;
     resize: none;
-    background-color: #fdf3f2; /* Unchanged */
+    background-color: #fdf3f2;
     color: #333;
     outline: none;
 }
@@ -68,24 +68,24 @@ select, button {
 }
 
 select {
-    border: 2px solid #E03F23; /* Standardized */
+    border: 2px solid #E03F23;
     background-color: #ffffff;
     color: #333;
     margin-bottom: 10px;
 }
 
 button {
-    background-color: #E03F23; /* Standardized */
+    background-color: #E03F23;
     color: white;
     font-weight: bold;
     cursor: pointer;
     letter-spacing: 1px;
-    box-shadow: 0 4px 8px rgba(224, 63, 35, 0.4); /* Standardized */
+    box-shadow: 0 4px 8px rgba(224, 63, 35, 0.4);
 }
 
 button:hover {
-    background-color: #E03F23; /* Standardized */
-    box-shadow: 0 6px 12px rgba(224, 63, 35, 0.5); /* Standardized */
+    background-color: #E03F23;
+    box-shadow: 0 6px 12px rgba(224, 63, 35, 0.5);
 }
 
 /* Output & Error Message */
@@ -108,14 +108,47 @@ button:hover {
     color: #155724;
 }
 
-/* Mobile & Tablet Optimization */
-@media (max-width: 1024px) {
+/* Desktop/Larger Screens (greater than 1280px) */
+@media (min-width: 1280px) {
     .container {
-        width: 95%;
-        padding: 6%;
+        max-width: 1200px;
+        padding: 4%;
+    }
+
+    .logo {
+        width: clamp(150px, 10vw, 250px); /* Ensure logo is scaled properly */
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem); /* Slightly larger heading */
+    }
+
+    textarea {
+        font-size: clamp(18px, 1.5vw, 30px);
     }
 }
 
+/* Medium Screens (MacBook Air, laptops, around 1280px) */
+@media (max-width: 1280px) and (min-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 5%;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 4vw, 3.2rem); /* Scaled down slightly */
+    }
+
+    .logo {
+        width: clamp(150px, 12vw, 220px); /* Scaled for mid-size screens */
+    }
+
+    textarea {
+        font-size: clamp(16px, 2.5vw, 28px);
+    }
+}
+
+/* Small Screens (Tablets and below, mobile devices) */
 @media (max-width: 768px) {
     body {
         align-items: flex-start;
@@ -124,26 +157,47 @@ button:hover {
 
     .container {
         width: 95%;
-        padding: 7%;
+        padding: 6%;
         border-radius: 15px;
+    }
+
+    h1 {
+        font-size: clamp(1.8rem, 4vw, 3rem); /* Slightly smaller font */
+    }
+
+    .logo {
+        width: clamp(150px, 15vw, 200px); /* Adjust logo for smaller screens */
     }
 
     textarea {
         height: 200px;
-        font-size: clamp(14px, 3vw, 20px); /* Adjusted font size */
+        font-size: clamp(14px, 3vw, 20px); /* Adjust font size for smaller screens */
     }
 
-    /* Adjust button and select to be smaller on small screens */
     select, button {
-        font-size: clamp(14px, 3vw, 18px); /* Slightly smaller on smaller devices */
+        font-size: clamp(14px, 3vw, 18px); /* Slightly smaller font */
         padding: 10px;
     }
 }
 
-/* Prevent zooming and enhance responsiveness */
+/* Extra Small Screens (Mobile devices under 600px) */
 @media (max-width: 600px) {
     body {
-        padding: 10px; /* Reduce padding on smaller screens */
-        font-size: 14px; /* Adjust general font size for better readability */
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 8%;
+        border-radius: 10px;
+    }
+
+    textarea {
+        font-size: clamp(14px, 3vw, 18px);
+    }
+
+    select, button {
+        font-size: clamp(14px, 3vw, 16px); /* Smaller font sizes */
+        padding: 8px;
     }
 }
