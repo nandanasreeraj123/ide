@@ -1,6 +1,10 @@
+html {
+    font-size: 30px;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background: #000000; /* Changed from gradient to black */
+    background: #000000;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,44 +12,42 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #fff;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px; /* Increased max-width for larger screens */
-    padding: 5%;
+    width: 100%;
+    max-width: 960px; /* Changed from 1200px */
+    margin: 0 auto;
+    padding: 4%;
     background-color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     text-align: center;
 }
 
-/* Logo */
 .logo {
-    width: clamp(150px, 15vw, 250px); /* Adjusted for better scaling */
+    width: clamp(150px, 10vw, 200px);
     height: auto;
     display: block;
     margin: 0 auto 30px;
 }
 
-/* Headings */
 h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    text-align: center;
+    /* font-size: 5rem; */
     color: #E03F23;
     margin-bottom: 30px;
     font-weight: 600;
+    text-align: center;
 }
 
-/* Textarea */
 textarea {
     width: 100%;
     height: 300px;
     padding: 12px;
     border: 2px solid #E03F23;
     font-family: monospace;
-    font-size: clamp(16px, 2vw, 30px);
+    font-size: 4rem;
     border-radius: 10px;
     margin-bottom: 30px;
     box-sizing: border-box;
@@ -55,12 +57,11 @@ textarea {
     outline: none;
 }
 
-/* Select & Button */
 select, button {
     width: 100%;
     padding: 12px;
     border: none;
-    font-size: clamp(16px, 2vw, 30px);
+    font-size: clamp(16px, 1.2vw, 24px);
     border-radius: 10px;
     box-sizing: border-box;
     outline: none;
@@ -88,12 +89,11 @@ button:hover {
     box-shadow: 0 6px 12px rgba(224, 63, 35, 0.5);
 }
 
-/* Output & Error Message */
 #output, #error {
     margin-top: 30px;
     padding: 12px;
     border-radius: 10px;
-    font-size: clamp(16px, 2vw, 30px);
+    font-size: clamp(16px, 1.2vw, 24px);
     white-space: pre-wrap;
     word-wrap: break-word;
 }
@@ -108,47 +108,42 @@ button:hover {
     color: #155724;
 }
 
-/* Desktop/Larger Screens (greater than 1280px) */
+/* Large screens */
 @media (min-width: 1280px) {
     .container {
-        max-width: 1200px;
-        padding: 4%;
-    }
-
-    .logo {
-        width: clamp(150px, 10vw, 250px); /* Ensure logo is scaled properly */
+        max-width: 960px;
+        padding: 3%;
     }
 
     h1 {
-        font-size: clamp(2.5rem, 4vw, 3.5rem); /* Slightly larger heading */
+        font-size: clamp(2.2rem, 2.5vw, 3.2rem);
     }
 
     textarea {
-        font-size: clamp(18px, 1.5vw, 30px);
+        font-size: clamp(18px, 1vw, 24px);
     }
 }
 
-/* Medium Screens (MacBook Air, laptops, around 1280px) */
+/* Medium screens */
 @media (max-width: 1280px) and (min-width: 768px) {
     .container {
-        width: 90%;
         padding: 5%;
     }
 
     h1 {
-        font-size: clamp(2rem, 4vw, 3.2rem); /* Scaled down slightly */
+        font-size: clamp(2rem, 3vw, 3rem);
     }
 
     .logo {
-        width: clamp(150px, 12vw, 220px); /* Scaled for mid-size screens */
+        width: clamp(150px, 12vw, 200px);
     }
 
     textarea {
-        font-size: clamp(16px, 2.5vw, 28px);
+        font-size: clamp(16px, 2vw, 22px);
     }
 }
 
-/* Small Screens (Tablets and below, mobile devices) */
+/* Small screens */
 @media (max-width: 768px) {
     body {
         align-items: flex-start;
@@ -162,25 +157,25 @@ button:hover {
     }
 
     h1 {
-        font-size: clamp(1.8rem, 4vw, 3rem); /* Slightly smaller font */
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
     }
 
     .logo {
-        width: clamp(150px, 15vw, 200px); /* Adjust logo for smaller screens */
+        width: clamp(140px, 14vw, 180px);
     }
 
     textarea {
         height: 200px;
-        font-size: clamp(14px, 3vw, 20px); /* Adjust font size for smaller screens */
+        font-size: clamp(14px, 3vw, 18px);
     }
 
     select, button {
-        font-size: clamp(14px, 3vw, 18px); /* Slightly smaller font */
+        font-size: clamp(14px, 3vw, 18px);
         padding: 10px;
     }
 }
 
-/* Extra Small Screens (Mobile devices under 600px) */
+/* Extra small screens */
 @media (max-width: 600px) {
     body {
         padding: 10px;
@@ -193,11 +188,19 @@ button:hover {
     }
 
     textarea {
-        font-size: clamp(14px, 3vw, 18px);
+        font-size: clamp(14px, 3vw, 16px);
     }
 
     select, button {
-        font-size: clamp(14px, 3vw, 16px); /* Smaller font sizes */
+        font-size: clamp(14px, 3vw, 16px);
         padding: 8px;
+    }
+}
+
+/* Optional: Retina/macOS scaling tweak (super subtle) */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 1400px) {
+    .container {
+        transform: scale(0.97);
+        transform-origin: top center;
     }
 }
