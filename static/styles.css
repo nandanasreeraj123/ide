@@ -8,6 +8,7 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #fff;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .container {
@@ -129,5 +130,20 @@ button:hover {
 
     textarea {
         height: 200px;
+        font-size: clamp(14px, 3vw, 20px); /* Adjusted font size */
+    }
+
+    /* Adjust button and select to be smaller on small screens */
+    select, button {
+        font-size: clamp(14px, 3vw, 18px); /* Slightly smaller on smaller devices */
+        padding: 10px;
+    }
+}
+
+/* Prevent zooming and enhance responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Reduce padding on smaller screens */
+        font-size: 14px; /* Adjust general font size for better readability */
     }
 }
