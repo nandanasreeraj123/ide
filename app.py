@@ -211,13 +211,16 @@
 #     app.run(debug=True)
 
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 import subprocess
-import os
 from quickjs import Context
 import requests
 import json
+
 app = Flask(__name__)
+
+# Store tokens in memory (can be replaced with a more persistent store like a database or Redis)
+tokens_store = {}
 
 output_path = "/tmp"
 
@@ -377,5 +380,23 @@ def run_cpp_code(code):
     output, error = process.communicate()
     return output if not error else error
 
+
+@app.route("/token")
+def validate_token():
+    """Validate the token sent by the external app and redirect to /ide if valid"""
+    token = request.args.get("token")
+
+    if token not in tokens_store :
+        # Invalidate the token after it's used
+        tokens_store[token] = True
+        # Redirect to the IDE page
+        return render_template('index.html', token=token)
+    else:
+        # Invalid or already used token
+        print(tokens_store)
+        return jsonify({"error": "Invalid or already used token"}), 400
+        
+    
+    
 if __name__ == "__main__":
     app.run(debug=True)
